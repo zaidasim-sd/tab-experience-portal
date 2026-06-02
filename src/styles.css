@@ -139,3 +139,13 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-breathe, .animate-ticker { animation: none !important; }
 }
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .story-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
