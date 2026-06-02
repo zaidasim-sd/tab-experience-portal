@@ -4,13 +4,10 @@ export function Story() {
   return (
     <section
       id="story"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "1fr",
-        minHeight: "100vh",
-      }}
-      className="md:grid-cols-2"
+      className="story-grid"
+      style={{ minHeight: "100vh" }}
     >
+
       <div
         style={{
           background: "var(--cream)",
