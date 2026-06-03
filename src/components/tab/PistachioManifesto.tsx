@@ -7,22 +7,24 @@ export function PistachioManifesto() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"],
+    offset: ["start end", "end start"],
   });
-  const scale = useTransform(scrollYProgress, [0.6, 1], [1, 0]);
-  const opacity = useTransform(scrollYProgress, [0.6, 1], [1, 0]);
+  // exit scale (TV-off)
+  const scale = useTransform(scrollYProgress, [0.75, 1], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0.75, 1], [1, 0]);
 
   return (
     <section
       ref={ref}
       style={{
         position: "relative",
-        minHeight: "100vh",
+        minHeight: "100svh",
         background: "var(--crimson)",
         overflow: "hidden",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        padding: "0 1.25rem",
       }}
     >
       <motion.div
@@ -30,7 +32,6 @@ export function PistachioManifesto() {
           scale,
           opacity,
           textAlign: "center",
-          padding: "0 1.5rem",
           maxWidth: 1100,
         }}
       >
@@ -40,7 +41,7 @@ export function PistachioManifesto() {
             margin: 0,
             fontFamily: "var(--font-display)",
             fontStyle: "italic",
-            fontSize: "6vw",
+            fontSize: "clamp(2.6rem, 9.5vw, 8rem)",
             color: "var(--cream)",
             lineHeight: 1,
             fontWeight: 500,
@@ -53,7 +54,7 @@ export function PistachioManifesto() {
           style={{
             marginTop: "2rem",
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(1.1rem, 1.8vw, 1.5rem)",
+            fontSize: "clamp(1.05rem, 2vw, 1.5rem)",
             color: "var(--cream)",
             lineHeight: 1.6,
             display: "flex",
@@ -62,27 +63,21 @@ export function PistachioManifesto() {
             gap: "0.4rem",
           }}
         >
-          {words.map((w, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.12, duration: 0.5 }}
-            >
-              {w}
-            </motion.span>
-          ))}
+          {words.map((w, i) => {
+            const start = 0.15 + (i / words.length) * 0.55;
+            const end = start + 0.05;
+            return <ScrollWord key={i} word={w} progress={scrollYProgress} start={start} end={end} />;
+          })}
         </p>
       </motion.div>
 
       <span
         style={{
           position: "absolute",
-          right: "3rem",
-          bottom: "2.5rem",
+          right: "1.5rem",
+          bottom: "calc(2.5rem + env(safe-area-inset-bottom))",
           fontFamily: "var(--font-mono)",
-          fontSize: "4rem",
+          fontSize: "clamp(2rem, 5vw, 4rem)",
           color: "var(--cream)",
           opacity: 0.15,
           letterSpacing: "-0.02em",
@@ -91,5 +86,23 @@ export function PistachioManifesto() {
         280–420
       </span>
     </section>
+  );
+}
+
+function ScrollWord({
+  word,
+  progress,
+  start,
+  end,
+}: {
+  word: string;
+  progress: ReturnType<typeof useScroll>["scrollYProgress"];
+  start: number;
+  end: number;
+}) {
+  const o = useTransform(progress, [start, end], [0, 1]);
+  const y = useTransform(progress, [start, end], [8, 0]);
+  return (
+    <motion.span style={{ opacity: o, y, display: "inline-block" }}>{word}</motion.span>
   );
 }

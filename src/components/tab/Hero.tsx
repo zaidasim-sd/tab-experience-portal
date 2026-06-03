@@ -1,7 +1,128 @@
 import { motion } from "framer-motion";
 import { CoffeeCupScroll } from "./CoffeeCupScroll";
+import { useBreakpoint } from "@/hooks/use-tab";
 
 export function Hero() {
+  const bp = useBreakpoint();
+  const isDesktop = bp === "desktop";
+
+  if (!isDesktop) {
+    // ── MOBILE / TABLET ──
+    const tabletScale = bp === "tablet" ? 1.15 : 1;
+    return (
+      <section
+        id="top"
+        style={{
+          position: "relative",
+          minHeight: "100svh",
+          background: "var(--cream)",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: "42%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "100%",
+            textAlign: "center",
+            pointerEvents: "none",
+          }}
+        >
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              margin: 0,
+              fontFamily: "var(--font-display)",
+              fontWeight: 700,
+              color: "var(--crimson)",
+              fontSize: "94vw",
+              lineHeight: 0.85,
+              letterSpacing: "-0.04em",
+            }}
+          >
+            tab.
+          </motion.h1>
+        </div>
+
+        <div
+          style={{
+            position: "absolute",
+            top: "65%",
+            left: 0,
+            right: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "0.35rem",
+          }}
+        >
+          {["a place to land.", "a place to think.", "a very good coffee."].map((t, i) => (
+            <motion.p
+              key={t}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 + i * 0.12, duration: 0.55, ease: "easeOut" }}
+              style={{
+                margin: 0,
+                fontFamily: "var(--font-sans)",
+                fontSize: `${5.5 * tabletScale}vw`,
+                color: "var(--crimson)",
+              }}
+            >
+              {t}
+            </motion.p>
+          ))}
+        </div>
+
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: "calc(20px + env(safe-area-inset-bottom))",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 6,
+            pointerEvents: "none",
+          }}
+        >
+          <motion.svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="var(--crimson)"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden
+            animate={{ scale: [1, 1.3, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </motion.svg>
+          <span
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 9,
+              color: "var(--crimson)",
+              letterSpacing: "0.25em",
+              textTransform: "lowercase",
+            }}
+          >
+            scroll in
+          </span>
+        </div>
+      </section>
+    );
+  }
+
+  // ── DESKTOP ──
   return (
     <section
       id="top"
@@ -12,7 +133,6 @@ export function Hero() {
         overflow: "hidden",
       }}
     >
-      {/* Right vertical line + rotated label */}
       <div
         style={{
           position: "absolute",
@@ -41,7 +161,6 @@ export function Hero() {
         </span>
       </div>
 
-      {/* Massive tab. */}
       <div
         style={{
           position: "absolute",
@@ -60,7 +179,7 @@ export function Hero() {
             fontFamily: "var(--font-display)",
             fontWeight: 700,
             color: "var(--crimson)",
-            fontSize: "28vw",
+            fontSize: "clamp(8rem, 28vw, 32rem)",
             lineHeight: 0.85,
             marginLeft: "-4vw",
             whiteSpace: "nowrap",
@@ -107,7 +226,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

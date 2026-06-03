@@ -1,15 +1,25 @@
 import { motion } from "framer-motion";
+import { useBreakpoint } from "@/hooks/use-tab";
+
+const hours = [
+  ["MON – FRI", "08:00 – 22:00"],
+  ["SAT – SUN", "09:00 – 23:00"],
+];
 
 export function FindUs() {
+  const bp = useBreakpoint();
+  const isMobile = bp !== "desktop";
+  const mapHeight = bp === "mobile" ? 240 : bp === "tablet" ? 320 : undefined;
+
   return (
     <section
       id="find"
       style={{
         background: "var(--cream)",
-        padding: "6rem 1.5rem",
+        padding: isMobile ? "4rem 1.25rem 6rem" : "6rem 1.5rem",
       }}
     >
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: isMobile ? "center" : "left" }}>
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -18,10 +28,11 @@ export function FindUs() {
           style={{
             margin: 0,
             fontFamily: "var(--font-mono)",
-            fontSize: "3rem",
+            fontSize: isMobile ? "18vw" : "clamp(2.5rem, 5vw, 4rem)",
             color: "var(--crimson)",
             letterSpacing: "-0.02em",
             textTransform: "lowercase",
+            lineHeight: 0.95,
           }}
         >
           karachi.
@@ -33,13 +44,13 @@ export function FindUs() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.15 }}
           style={{
-            marginTop: "1.2rem",
+            margin: isMobile ? "1.2rem auto 0" : "1.2rem 0 0",
             maxWidth: 520,
-            fontFamily: "var(--font-display)",
-            fontStyle: "italic",
-            fontSize: "1.4rem",
+            fontFamily: isMobile ? "var(--font-sans)" : "var(--font-display)",
+            fontStyle: isMobile ? "normal" : "italic",
+            fontSize: isMobile ? "1rem" : "1.4rem",
             color: "var(--crimson)",
-            lineHeight: 1.4,
+            lineHeight: 1.5,
           }}
         >
           we're not hard to find. we're just easy to miss if you're moving too fast.
@@ -51,7 +62,7 @@ export function FindUs() {
             marginTop: "3rem",
             border: "1px solid color-mix(in oklab, var(--crimson) 25%, transparent)",
             overflow: "hidden",
-            aspectRatio: "16 / 9",
+            ...(mapHeight ? { height: mapHeight } : { aspectRatio: "16 / 9" }),
           }}
         >
           <iframe
@@ -65,7 +76,6 @@ export function FindUs() {
             }}
             loading="lazy"
           />
-          {/* Custom pin */}
           <svg
             width="36"
             height="48"
@@ -91,20 +101,41 @@ export function FindUs() {
           style={{
             marginTop: "2.5rem",
             display: "grid",
-            gap: "0.4rem",
+            gridTemplateColumns: "1fr 1fr",
             fontFamily: "var(--font-mono)",
-            fontSize: "0.9rem",
+            fontSize: isMobile ? 13 : "0.9rem",
             color: "var(--crimson)",
+            maxWidth: isMobile ? 360 : 520,
+            marginInline: isMobile ? "auto" : undefined,
+            textAlign: "left",
           }}
         >
-          <div style={{ display: "flex", gap: "2rem" }}>
-            <span style={{ minWidth: 110 }}>MON – FRI</span>
-            <span>08:00 – 22:00</span>
-          </div>
-          <div style={{ display: "flex", gap: "2rem" }}>
-            <span style={{ minWidth: 110 }}>SAT – SUN</span>
-            <span>09:00 – 23:00</span>
-          </div>
+          {hours.map(([d, t]) => (
+            <div
+              key={d}
+              style={{
+                display: "contents",
+              }}
+            >
+              <div
+                style={{
+                  padding: "10px 4px",
+                  borderTop: "1px solid color-mix(in oklab, var(--crimson) 25%, transparent)",
+                }}
+              >
+                {d}
+              </div>
+              <div
+                style={{
+                  padding: "10px 4px",
+                  textAlign: "right",
+                  borderTop: "1px solid color-mix(in oklab, var(--crimson) 25%, transparent)",
+                }}
+              >
+                {t}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
