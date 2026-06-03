@@ -22,68 +22,104 @@ export function Hero() {
         <div
           style={{
             position: "absolute",
-            top: "42%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
+            right: "1.25rem",
+            top: 0,
+            bottom: 0,
+            display: "flex",
+            alignItems: "center",
+            gap: "0.75rem",
+            pointerEvents: "none",
+          }}
+        >
+          <div style={{ width: 1, height: "25vh", background: "var(--crimson)" }} />
+          <span
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: 9,
+              color: "var(--crimson)",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              writingMode: "vertical-rl",
+              transform: "rotate(180deg)",
+            }}
+          >
+            EST. KARACHI — SPECIALTY COFFEE
+          </span>
+        </div>
+
+        <div
+          style={{
+            position: "absolute",
+            top: "40%",
+            left: 0,
+            transform: "translateY(-50%)",
             width: "100%",
-            textAlign: "center",
             pointerEvents: "none",
           }}
         >
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             style={{
               margin: 0,
               fontFamily: "var(--font-display)",
               fontWeight: 700,
               color: "var(--crimson)",
-              fontSize: "94vw",
+              fontSize: "clamp(6rem, 25vh, 16rem)",
               lineHeight: 0.85,
               letterSpacing: "-0.04em",
+              marginLeft: "-2vw",
+              paddingRight: "2vw",
             }}
           >
             tab.
           </motion.h1>
+
+          <div
+            style={{
+              marginTop: "2rem",
+              paddingLeft: "8vw",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "0.4rem",
+            }}
+          >
+            {[
+              { text: "a place to land.", size: `${8 * tabletScale}vw` },
+              { text: "a place to think.", size: `${6 * tabletScale}vw` },
+              { text: "a very good coffee.", size: `${4.5 * tabletScale}vw` },
+            ].map((l, i) => (
+              <motion.p
+                key={l.text}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 + i * 0.2, duration: 0.6, ease: "easeOut" }}
+                style={{
+                  margin: 0,
+                  fontFamily: "var(--font-display)",
+                  fontStyle: "italic",
+                  fontSize: l.size,
+                  color: "var(--crimson)",
+                  lineHeight: 1.1,
+                }}
+              >
+                {l.text}
+              </motion.p>
+            ))}
+          </div>
         </div>
 
-        <div
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4, duration: 0.6 }}
           style={{
             position: "absolute",
-            top: "65%",
-            left: 0,
-            right: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "0.35rem",
-          }}
-        >
-          {["a place to land.", "a place to think.", "a very good coffee."].map((t, i) => (
-            <motion.p
-              key={t}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 + i * 0.12, duration: 0.55, ease: "easeOut" }}
-              style={{
-                margin: 0,
-                fontFamily: "var(--font-sans)",
-                fontSize: `${5.5 * tabletScale}vw`,
-                color: "var(--crimson)",
-              }}
-            >
-              {t}
-            </motion.p>
-          ))}
-        </div>
-
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: "calc(20px + env(safe-area-inset-bottom))",
+            bottom: "calc(90px + env(safe-area-inset-bottom))",
+            left: "50%",
+            transform: "translateX(-50%)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -91,21 +127,7 @@ export function Hero() {
             pointerEvents: "none",
           }}
         >
-          <motion.svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--crimson)"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden
-            animate={{ scale: [1, 1.3, 1] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </motion.svg>
+          <CoffeeCupScroll />
           <span
             style={{
               fontFamily: "var(--font-mono)",
@@ -117,7 +139,7 @@ export function Hero() {
           >
             scroll in
           </span>
-        </div>
+        </motion.div>
       </section>
     );
   }
@@ -179,9 +201,10 @@ export function Hero() {
             fontFamily: "var(--font-display)",
             fontWeight: 700,
             color: "var(--crimson)",
-            fontSize: "clamp(8rem, 28vw, 32rem)",
+            fontSize: "clamp(8rem, 24vw, 30rem)",
             lineHeight: 0.85,
-            marginLeft: "-4vw",
+            marginLeft: "-2vw",
+            paddingRight: "4vw",
             whiteSpace: "nowrap",
             willChange: "transform",
           }}
@@ -251,7 +274,7 @@ export function Hero() {
             textTransform: "lowercase",
           }}
         >
-          scroll to order
+          scroll to explore
         </span>
       </motion.div>
     </section>

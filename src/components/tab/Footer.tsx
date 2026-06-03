@@ -40,8 +40,28 @@ export function Footer() {
           </svg>
         </a>
         <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, opacity: 0.8 }}>
-          © tab. all rights reserved
+          © tab. All Rights Reserved
         </span>
+        <a
+          href="https://vision71tech.com"
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "0.6rem",
+            textDecoration: "none",
+            marginTop: "1.5rem",
+            opacity: 0.85,
+            transition: "opacity 0.25s ease",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+          onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
+        >
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "var(--cream)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Powered By</span>
+          <img src="/v71_white.png" alt="Vision71 Tech" style={{ height: "40px", width: "auto", objectFit: "contain" }} />
+        </a>
       </footer>
     );
   }
@@ -66,23 +86,45 @@ export function Footer() {
         <div style={{ textAlign: "center", fontFamily: "var(--font-display)", fontStyle: "italic", fontSize: "1.4rem" }}>
           pull up a chair.
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "1.2rem" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "1.8rem" }}>
           <a
-            href="https://instagram.com"
+            href="https://vision71tech.com"
             target="_blank"
             rel="noreferrer"
-            aria-label="Instagram"
-            style={{ color: "var(--cream)", lineHeight: 0 }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              gap: "0.6rem",
+              textDecoration: "none",
+              opacity: 0.85,
+              transition: "opacity 0.25s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.85")}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
-            </svg>
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--cream)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Powered By</span>
+            <img src="/v71_white.png" alt="Vision71 Tech" style={{ height: "48px", width: "auto", objectFit: "contain" }} />
           </a>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10 }}>
-            © tab. all rights reserved
-          </span>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+              style={{ color: "var(--cream)", lineHeight: 0 }}
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 10 }}>
+              © tab. All Rights Reserved
+            </span>
+          </div>
         </div>
       </footer>
     </>

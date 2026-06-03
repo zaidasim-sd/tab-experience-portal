@@ -202,7 +202,7 @@ export function Menu() {
   return (
     <section id="menu" style={{ background: "var(--offwhite)" }}>
       {/* Title band — drawer slam */}
-      <div ref={bandRef} style={{ background: "var(--crimson)", overflow: "hidden" }}>
+      <div ref={bandRef} data-theme="dark" style={{ background: "var(--crimson)", overflow: "hidden" }}>
         <motion.div
           initial={{ y: 80, opacity: 0 }}
           animate={bandInView ? { y: 0, opacity: 1 } : {}}

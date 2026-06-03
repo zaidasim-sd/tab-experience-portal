@@ -56,6 +56,7 @@ export function Intro() {
           }}
         >
           <motion.div
+            data-theme="dark"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}

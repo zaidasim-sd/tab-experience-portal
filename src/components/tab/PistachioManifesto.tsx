@@ -16,6 +16,7 @@ export function PistachioManifesto() {
   return (
     <section
       ref={ref}
+      data-theme="dark"
       style={{
         position: "relative",
         minHeight: "100svh",
@@ -64,27 +65,14 @@ export function PistachioManifesto() {
           }}
         >
           {words.map((w, i) => {
-            const start = 0.15 + (i / words.length) * 0.55;
+            const start = 0.1 + (i / words.length) * 0.35;
             const end = start + 0.05;
             return <ScrollWord key={i} word={w} progress={scrollYProgress} start={start} end={end} />;
           })}
         </p>
       </motion.div>
 
-      <span
-        style={{
-          position: "absolute",
-          right: "1.5rem",
-          bottom: "calc(2.5rem + env(safe-area-inset-bottom))",
-          fontFamily: "var(--font-mono)",
-          fontSize: "clamp(2rem, 5vw, 4rem)",
-          color: "var(--cream)",
-          opacity: 0.15,
-          letterSpacing: "-0.02em",
-        }}
-      >
-        280–420
-      </span>
+
     </section>
   );
 }

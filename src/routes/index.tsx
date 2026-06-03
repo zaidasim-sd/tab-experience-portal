@@ -10,7 +10,7 @@ import { CookieTicker } from "@/components/tab/CookieTicker";
 import { FindUs } from "@/components/tab/FindUs";
 import { Footer } from "@/components/tab/Footer";
 import { Grain } from "@/components/tab/Grain";
-import { WaveDivider } from "@/components/tab/WaveDivider";
+
 import { InitialRendering } from "@/components/tab/InitialRendering";
 
 const Menu = lazy(() => import("@/components/tab/Menu").then((m) => ({ default: m.Menu })));
@@ -45,21 +45,17 @@ function Index() {
       <Nav />
       <main>
         <Hero />
-        {/* cream → crimson */}
-        <WaveDivider top="var(--crimson)" bottom="var(--cream)" variant={1} />
+
         <Suspense fallback={<div style={{ minHeight: "60vh", background: "var(--offwhite)" }} />}>
           <Menu />
         </Suspense>
-        {/* offwhite → crimson */}
-        <WaveDivider top="var(--crimson)" bottom="var(--offwhite)" variant={2} />
+
         <PistachioManifesto />
-        {/* crimson → cream */}
-        <WaveDivider top="var(--cream)" bottom="var(--crimson)" variant={3} />
+
         <Story />
         <CookieTicker />
         <FindUs />
-        {/* cream → crimson (footer) */}
-        <WaveDivider top="var(--crimson)" bottom="var(--cream)" variant={4} />
+
       </main>
       <Footer />
     </>
