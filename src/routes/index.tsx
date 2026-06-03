@@ -11,6 +11,7 @@ import { FindUs } from "@/components/tab/FindUs";
 import { Footer } from "@/components/tab/Footer";
 import { Grain } from "@/components/tab/Grain";
 import { WaveDivider } from "@/components/tab/WaveDivider";
+import { InitialRendering } from "@/components/tab/InitialRendering";
 
 const Menu = lazy(() => import("@/components/tab/Menu").then((m) => ({ default: m.Menu })));
 
@@ -38,6 +39,7 @@ function Index() {
   return (
     <>
       <Intro />
+      <InitialRendering />
       <Grain />
       <CustomCursor />
       <Nav />
