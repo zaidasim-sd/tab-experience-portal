@@ -96,8 +96,8 @@
     ::-webkit-scrollbar { display: none; }
   }
 
-  /* Hide native cursor on desktop (custom cursor renders) */
-  @media (hover: hover) and (pointer: fine) {
+  /* Hide native cursor on desktop (>1024px); custom cursor renders there */
+  @media (hover: hover) and (pointer: fine) and (min-width: 1025px) {
     html, body, * { cursor: none !important; }
   }
 }
@@ -138,14 +138,28 @@
 
 @media (prefers-reduced-motion: reduce) {
   .animate-breathe, .animate-ticker { animation: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 .story-grid {
   display: grid;
   grid-template-columns: 1fr;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .story-grid {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+/* Cookie ticker breakpoint variants */
+.tab-ticker-mobile { display: block; }
+.tab-ticker-desktop { display: none; }
+@media (min-width: 1024px) {
+  .tab-ticker-mobile { display: none; }
+  .tab-ticker-desktop { display: block; }
 }
