@@ -9,25 +9,26 @@ export function CustomCursor() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    // Desktop only — >1024px AND fine pointer
+    if (!window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 1025px)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     setEnabled(true);
 
     const move = (e: MouseEvent) => {
       target.current.x = e.clientX;
       target.current.y = e.clientY;
       const el = e.target as HTMLElement | null;
-      if (el && el.closest("a, button, [data-cursor='hover'], input, textarea, select, label")) {
-        setHover(true);
-      } else {
-        setHover(false);
-      }
+      setHover(
+        !!el?.closest("a, button, [data-cursor='hover'], input, textarea, select, label")
+      );
     };
     window.addEventListener("mousemove", move);
 
     let raf = 0;
     const tick = () => {
-      pos.current.x += (target.current.x - pos.current.x) * 0.18;
-      pos.current.y += (target.current.y - pos.current.y) * 0.18;
+      // Tighter follow — ~25ms of lag at 60fps
+      pos.current.x += (target.current.x - pos.current.x) * 0.28;
+      pos.current.y += (target.current.y - pos.current.y) * 0.28;
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0) translate(-50%, -50%)`;
       }
@@ -57,8 +58,7 @@ export function CustomCursor() {
         border: hover ? "1.5px solid var(--crimson)" : "none",
         pointerEvents: "none",
         zIndex: 9999,
-        transition: "width 150ms ease, height 150ms ease, background 150ms ease, border 150ms ease",
-        mixBlendMode: "normal",
+        transition: "width 120ms ease-out, height 120ms ease-out, background 120ms ease-out, border 120ms ease-out",
         willChange: "transform, width, height",
       }}
     />
