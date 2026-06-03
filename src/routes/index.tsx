@@ -18,7 +18,7 @@ const Menu = lazy(() => import("@/components/tab/Menu").then((m) => ({ default: 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "tab. — specialty coffee, Karachi" },
+      { title: "tab. Specialty Coffee" },
       {
         name: "description",
         content: "tab. is a small specialty coffee cafe in Karachi. a place to land. a place to think. a very good coffee.",
