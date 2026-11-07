@@ -1,0 +1,16 @@
+{
+  "name": "tab-cafe-payment-poc",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "dev": "node --watch --env-file=.env src/server.js",
+    "start": "node --env-file=.env src/server.js",
+    "seed": "node --env-file=.env scripts/seed.js",
+    "reconcile": "node --env-file=.env scripts/reconcile.js",
+    "smoke": "node --env-file=.env scripts/smoke.js",
+    "test": "node --test test/*.test.js",
+    "test:atlas": "node --env-file=.env --test test/atlas.test.js"
+  },
+  "dependencies": { "mongodb": "^6.21.0" }
+}

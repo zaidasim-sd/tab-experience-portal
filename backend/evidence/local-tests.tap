@@ -1,0 +1,124 @@
+TAP version 13
+# Subtest: Atlas persistence, unique indexes, concurrent checkout and transaction rollback (provider SIMULATED)
+ok 1 - Atlas persistence, unique indexes, concurrent checkout and transaction rollback (provider SIMULATED) # SKIP
+  ---
+  duration_ms: 0.9768
+  type: 'test'
+  ...
+# Subtest: SIMULATION: server prices come from catalogue; client amount is rejected
+ok 2 - SIMULATION: server prices come from catalogue; client amount is rejected
+  ---
+  duration_ms: 4.4385
+  type: 'test'
+  ...
+# Subtest: SIMULATION: repeated order key reuses order, changed cart conflicts
+ok 3 - SIMULATION: repeated order key reuses order, changed cart conflicts
+  ---
+  duration_ms: 0.3866
+  type: 'test'
+  ...
+# Subtest: SIMULATION: concurrent checkout submissions create one provider tracker
+ok 4 - SIMULATION: concurrent checkout submissions create one provider tracker
+  ---
+  duration_ms: 1.3545
+  type: 'test'
+  ...
+# Subtest: SIMULATION: success after page closes is confirmed without a browser return
+ok 5 - SIMULATION: success after page closes is confirmed without a browser return
+  ---
+  duration_ms: 3.4878
+  type: 'test'
+  ...
+# Subtest: SIMULATION: duplicate/delayed webhook is idempotent; failure cannot downgrade paid
+ok 6 - SIMULATION: duplicate/delayed webhook is idempotent; failure cannot downgrade paid
+  ---
+  duration_ms: 1.2302
+  type: 'test'
+  ...
+# Subtest: SIMULATION: failed attempt can later succeed on same tracker
+ok 7 - SIMULATION: failed attempt can later succeed on same tracker
+  ---
+  duration_ms: 0.8843
+  type: 'test'
+  ...
+# Subtest: SIMULATION: invalid signature, altered raw bytes, legacy inner-data signature rejected
+ok 8 - SIMULATION: invalid signature, altered raw bytes, legacy inner-data signature rejected
+  ---
+  duration_ms: 0.9447
+  type: 'test'
+  ...
+# Subtest: SIMULATION: signed amount/currency mismatch is recorded and never marks paid
+ok 9 - SIMULATION: signed amount/currency mismatch is recorded and never marks paid
+  ---
+  duration_ms: 0.9711
+  type: 'test'
+  ...
+# Subtest: SIMULATION: merchant, order, environment and tracker mismatches cannot mark paid
+ok 10 - SIMULATION: merchant, order, environment and tracker mismatches cannot mark paid
+  ---
+  duration_ms: 0.9945
+  type: 'test'
+  ...
+# Subtest: SIMULATION: same event ID with changed content conflicts
+ok 11 - SIMULATION: same event ID with changed content conflicts
+  ---
+  duration_ms: 0.7348
+  type: 'test'
+  ...
+# Subtest: SIMULATION: timeout is ambiguous, repeated checkout does not repeat tracker POST
+ok 12 - SIMULATION: timeout is ambiguous, repeated checkout does not repeat tracker POST
+  ---
+  duration_ms: 0.5328
+  type: 'test'
+  ...
+# Subtest: SIMULATION: interrupted tracker attachment can be recovered with verified provider metadata
+ok 13 - SIMULATION: interrupted tracker attachment can be recovered with verified provider metadata
+  ---
+  duration_ms: 0.5257
+  type: 'test'
+  ...
+# Subtest: SIMULATION: persisted inbox is retried after worker reconstruction/provider outage
+ok 14 - SIMULATION: persisted inbox is retried after worker reconstruction/provider outage
+  ---
+  duration_ms: 0.8169
+  type: 'test'
+  ...
+# Subtest: SIMULATION: authorized-but-uncaptured provider status never marks paid
+ok 15 - SIMULATION: authorized-but-uncaptured provider status never marks paid
+  ---
+  duration_ms: 0.5115
+  type: 'test'
+  ...
+# Subtest: SIMULATION: v3 transport uses sandbox, minor units, secret header and current checkout URL
+ok 16 - SIMULATION: v3 transport uses sandbox, minor units, secret header and current checkout URL
+  ---
+  duration_ms: 5.1211
+  type: 'test'
+  ...
+# Subtest: SIMULATION: provider transport failure is sanitized
+ok 17 - SIMULATION: provider transport failure is sanitized
+  ---
+  duration_ms: 0.4171
+  type: 'test'
+  ...
+# Subtest: sandbox guard refuses production and placeholder credentials
+ok 18 - sandbox guard refuses production and placeholder credentials
+  ---
+  duration_ms: 0.4191
+  type: 'test'
+  ...
+# Subtest: SIMULATION HTTP: cancel/return cannot mark paid, protected routes require token, invalid JSON rejected
+ok 19 - SIMULATION HTTP: cancel/return cannot mark paid, protected routes require token, invalid JSON rejected
+  ---
+  duration_ms: 62.4955
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 276.9996

@@ -8,6 +8,7 @@ const links = [
   { label: "menu", href: "#menu" },
   { label: "story", href: "#story" },
   { label: "find us", href: "#find" },
+  { label: "order ↗", href: "/order" },
 ];
 
 export function Nav() {
@@ -53,7 +54,7 @@ export function Nav() {
             transform: "translateX(-50%)",
             bottom: "calc(20px + env(safe-area-inset-bottom))",
             zIndex: 100,
-            padding: "14px 32px",
+            padding: "14px 22px",
             background: "rgba(237, 232, 223, 0.85)",
             border: "1px solid var(--crimson)",
             borderRadius: 999,
@@ -61,7 +62,7 @@ export function Nav() {
             WebkitBackdropFilter: "blur(8px)",
             display: "flex",
             alignItems: "center",
-            gap: 16,
+            gap: 12,
             fontFamily: "var(--font-sans)",
             fontSize: bp === "tablet" ? 16 : 14,
             color: "var(--crimson)",

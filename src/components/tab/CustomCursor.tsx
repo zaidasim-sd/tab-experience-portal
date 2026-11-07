@@ -22,7 +22,7 @@ export function CustomCursor() {
       setHover(
         !!el?.closest("a, button, [data-cursor='hover'], input, textarea, select, label, [data-cursor='menu']")
       );
-      setDark(!!el?.closest("footer, [data-theme='dark']"));
+      setDark(!!el?.closest("footer, [data-theme='dark'], .order-primary, .order-mobile-bag"));
     };
     window.addEventListener("mousemove", move);
 
@@ -48,6 +48,7 @@ export function CustomCursor() {
   return (
     <div
       ref={dotRef}
+      data-tab-cursor=""
       aria-hidden
       style={{
         position: "fixed",

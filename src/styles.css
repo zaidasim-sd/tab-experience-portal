@@ -96,9 +96,11 @@
     ::-webkit-scrollbar { display: none; }
   }
 
-  /* Hide native cursor on desktop (>1024px); custom cursor renders there */
+  /* Hide the native cursor only while a custom cursor is actually mounted. */
   @media (hover: hover) and (pointer: fine) and (min-width: 1025px) {
-    html, body, * { cursor: none !important; }
+    html:has([data-tab-cursor]),
+    body:has([data-tab-cursor]),
+    body:has([data-tab-cursor]) * { cursor: none !important; }
   }
 }
 

@@ -6,14 +6,15 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import netlifyPlugin from "@netlify/vite-plugin-tanstack-start";
 import path from "path";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
     tailwindcss(),
     tsConfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackStart({
       server: { entry: "server" }
     }),
-    netlifyPlugin(),
+    // Keep Netlify's deployment adapter out of local dev and preview servers.
+    command === "build" && netlifyPlugin(),
     react(),
   ],
   resolve: {
@@ -22,6 +23,13 @@ export default defineConfig({
     }
   },
   server: {
-    port: 8080
+    host: "localhost",
+    port: 8081,
+    strictPort: true
+  },
+  preview: {
+    host: "localhost",
+    port: 8081,
+    strictPort: true
   }
-});
+}));

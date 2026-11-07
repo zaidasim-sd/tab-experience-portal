@@ -201,6 +201,9 @@ export function Menu() {
 
   return (
     <section id="menu" style={{ background: "var(--offwhite)" }}>
+      <div style={{ padding: "24px", textAlign: "center", borderTop: "1px solid var(--border)" }}>
+        <a href="/order" style={{ fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: "0.08em", color: "var(--crimson)", textUnderlineOffset: 6 }}>a good coffee is a few clicks away. order here ↗</a>
+      </div>
       {/* Title band — drawer slam */}
       <div ref={bandRef} data-theme="dark" style={{ background: "var(--crimson)", overflow: "hidden" }}>
         <motion.div
