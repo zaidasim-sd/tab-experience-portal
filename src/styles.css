@@ -163,3 +163,74 @@
   .tab-ticker-mobile { display: none; }
   .tab-ticker-desktop { display: block; }
 }
+
+/* Global temporary confirmation state, mounted by the shared root shell. */
+.site-background[inert] {
+  user-select: none;
+}
+
+.confirmation-overlay {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  padding: clamp(1.25rem, 5vw, 3rem);
+  background: color-mix(in srgb, var(--crimson) 25%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.confirmation-card {
+  width: min(100%, 32rem);
+  padding: clamp(2rem, 7vw, 3.5rem);
+  border: 1px solid color-mix(in srgb, var(--crimson) 22%, transparent);
+  border-radius: calc(var(--radius) + 0.5rem);
+  background: color-mix(in srgb, var(--offwhite) 94%, transparent);
+  color: var(--crimson);
+  text-align: center;
+  box-shadow: 0 24px 80px color-mix(in srgb, var(--crimson) 20%, transparent);
+}
+
+.confirmation-card h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.confirmation-message {
+  margin: 1rem 0 0;
+  color: color-mix(in srgb, var(--crimson) 72%, transparent);
+  font-size: clamp(0.95rem, 2.6vw, 1.05rem);
+  line-height: 1.6;
+}
+
+.confirmation-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--crimson) 20%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cream) 78%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.045em;
+}
+
+.confirmation-status-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--crimson);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confirmation-overlay { scroll-behavior: auto; }
+}

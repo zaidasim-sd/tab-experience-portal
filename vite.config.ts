@@ -11,9 +11,19 @@ export default defineConfig({
     tailwindcss(),
     tsConfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackStart({
+      // The route code splitter builds import references from absolute paths;
+      // disabling it avoids invalid JS when this checkout path contains an apostrophe.
+      router: {
+        autoCodeSplitting: false,
+        codeSplittingOptions: { defaultBehavior: [] },
+      },
       server: { entry: "server" }
     }),
-    netlifyPlugin(),
+    netlifyPlugin({
+      dev: {
+        edgeFunctions: { enabled: false },
+      },
+    }),
     react(),
   ],
   resolve: {

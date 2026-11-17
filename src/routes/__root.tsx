@@ -12,6 +12,9 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportAppError } from "../lib/error-reporting";
 
+// Central switch for the temporary public-site confirmation state.
+export const PUBLIC_SITE_DISABLED = true;
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -117,10 +120,48 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <div className="site-background" inert={PUBLIC_SITE_DISABLED}>
+          {children}
+        </div>
+        {PUBLIC_SITE_DISABLED && <AwaitingConfirmation />}
         <Scripts />
       </body>
     </html>
+  );
+}
+
+function AwaitingConfirmation() {
+  useEffect(() => {
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+    };
+  }, []);
+
+  return (
+    <div className="confirmation-overlay">
+      <section
+        className="confirmation-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="confirmation-heading"
+        aria-describedby="confirmation-message"
+      >
+        <h1 id="confirmation-heading">Awaiting Confirmation</h1>
+        <p id="confirmation-message" className="confirmation-message">
+          This website is temporarily unavailable.
+        </p>
+        <div className="confirmation-status" role="status">
+          <span className="confirmation-status-dot" aria-hidden="true" />
+          Confirmation Pending
+        </div>
+      </section>
+    </div>
   );
 }
 
