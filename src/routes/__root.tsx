@@ -13,7 +13,7 @@ import appCss from "../styles.css?url";
 import { reportAppError } from "../lib/error-reporting";
 
 // Central switch for the temporary public-site confirmation state.
-export const PUBLIC_SITE_DISABLED = true;
+export const PUBLIC_SITE_DISABLED = false;
 
 function NotFoundComponent() {
   return (
