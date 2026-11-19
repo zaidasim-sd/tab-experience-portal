@@ -4,10 +4,13 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "vite dev --host",
-    "build": "vite build",
+    "dev": "node scripts/serve-holding-site.mjs",
+    "dev:app": "vite dev --host",
+    "build": "node scripts/build-holding-site.mjs",
+    "build:app": "vite build",
     "build:dev": "vite build --mode development",
-    "preview": "vite preview",
+    "preview": "node scripts/serve-holding-site.mjs",
+    "preview:app": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const KEY = "tab_intro_played";
+// Reset the one-time intro after the confirmation modal has been removed.
+const KEY = "tab_intro_played_v3";
 
 export function Intro() {
   const [show, setShow] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
   const [folding, setFolding] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (sessionStorage.getItem(KEY)) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      sessionStorage.setItem(KEY, "1");
-      return;
-    }
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setReduceMotion(prefersReducedMotion);
     setShow(true);
+    if (prefersReducedMotion) {
+      const end = setTimeout(() => {
+        setShow(false);
+        sessionStorage.setItem(KEY, "1");
+      }, 1200);
+      return () => clearTimeout(end);
+    }
     const t = setTimeout(() => setShowSkip(true), 1500);
     const fold = setTimeout(() => setFolding(true), 2800);
     const end = setTimeout(() => {
@@ -41,8 +48,14 @@ export function Intro() {
       {show && (
         <motion.div
           key="intro"
-          initial={{ y: 0 }}
-          animate={folding ? { y: "-100%", transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] } } : {}}
+          initial={reduceMotion ? false : { y: 0 }}
+          animate={
+            reduceMotion
+              ? { y: 0 }
+              : folding
+                ? { y: "-100%", transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] } }
+                : {}
+          }
           style={{
             position: "fixed",
             inset: 0,
@@ -57,9 +70,9 @@ export function Intro() {
         >
           <motion.div
             data-theme="dark"
-            initial={{ scale: 0 }}
+            initial={reduceMotion ? false : { scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
             style={{
               width: "80vmin",
               height: "80vmin",
@@ -75,9 +88,9 @@ export function Intro() {
               {letters.map((l, i) => (
                 <motion.span
                   key={i}
-                  initial={{ y: -120, opacity: 0 }}
+                  initial={reduceMotion ? false : { y: -120, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{
+                  transition={reduceMotion ? { duration: 0 } : {
                     delay: 0.9 + i * 0.08,
                     type: "spring",
                     stiffness: 380,
